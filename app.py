@@ -150,10 +150,30 @@ elif menu == "Practice":
     if not verses:
         st.info("Add some verses first.")
     else:
-        # Initialize session state properly
+        # --- Helper ---
+        def get_masked_indices(verse):
+            words = verse["text"].split()
+            return [i for i in range(len(words)) if random.random() < 0.3]
+
+        # --- Handle flag-based state updates before rendering ---
+        if st.session_state.get("next_verse", False):
+            st.session_state.current_verse = random.choice(verses)
+            st.session_state.masked_indices = get_masked_indices(st.session_state.current_verse)
+            st.session_state.input_key = str(random.randint(0, 1_000_000))
+            st.session_state.next_verse = False
+            st.experimental_rerun()
+
+        if st.session_state.get("try_again", False):
+            st.session_state.masked_indices = get_masked_indices(st.session_state.current_verse)
+            st.session_state.input_key = str(random.randint(0, 1_000_000))
+            st.session_state.try_again = False
+            st.experimental_rerun()
+
+        # --- Initialize if missing ---
         if "current_verse" not in st.session_state:
-            st.session_state.current_verse, st.session_state.masked_indices = load_new_masked_verse(verses)
-            st.session_state.input_key = random.randint(0, 999999)
+            st.session_state.current_verse = random.choice(verses)
+            st.session_state.masked_indices = get_masked_indices(st.session_state.current_verse)
+            st.session_state.input_key = str(random.randint(0, 1_000_000))
 
         v = st.session_state.current_verse
         st.markdown(f"### {v['reference']}")
@@ -162,13 +182,9 @@ elif menu == "Practice":
         original_words = v["text"].split()
 
         if practice_type == "Fill in the Blanks":
-            # Only generate masked indices once
-            if "masked_indices" not in st.session_state or not st.session_state.masked_indices:
-                st.session_state.masked_indices = [i for i in range(len(original_words)) if random.random() < 0.3]
-
             masked_indices = st.session_state.masked_indices
 
-            # Display the verse with blanks
+            # Display with blanks
             displayed = [
                 "_______" if i in masked_indices else word
                 for i, word in enumerate(original_words)
@@ -178,10 +194,9 @@ elif menu == "Practice":
             with st.form(f"fill_in_blanks_{st.session_state.input_key}"):
                 user_inputs = []
                 for i in masked_indices:
-                    key = f"blank_input_{i}"  # Unique key to isolate inputs per word
+                    key = f"{st.session_state.input_key}_input_{i}"
                     user_word = st.text_input(f"Word #{i+1}", key=key)
                     user_inputs.append((i, user_word.strip()))
-
                 submitted = st.form_submit_button("Check Answers")
 
             if submitted:
@@ -196,22 +211,19 @@ elif menu == "Practice":
                     st.markdown("**Correct Verse:**")
                     st.markdown(f"> {v['text']}")
 
-                # Save review date for the current verse
                 v["last_reviewed"] = str(datetime.date.today())
                 save_verses(verses)
 
-                # ✅ Wait for user to choose to move on
+                # Buttons to control next action
                 col1, col2 = st.columns(2)
 
                 with col1:
                     if st.button("🔁 Try Again"):
-                        rerandomize_blanks_for_current_verse()
-                        st.experimental_rerun()
+                        st.session_state.try_again = True
+
                 with col2:
                     if st.button("➡️ Next Verse"):
-                        st.session_state.current_verse = random.choice(verses)
-                        st.session_state.masked_indices = []
-                        st.experimental_rerun()
+                        st.session_state.next_verse = True
 
         elif practice_type == "Type Full Verse":
             user_input = st.text_area("Type the verse from memory:")
@@ -224,5 +236,7 @@ elif menu == "Practice":
 
                 v["last_reviewed"] = str(datetime.date.today())
                 save_verses(verses)
+
                 st.session_state.current_verse = random.choice(verses)
-                st.session_state.masked_indices = []  # Reset
+                st.session_state.masked_indices = get_masked_indices(st.session_state.current_verse)
+                st.session_state.input_key = str(random.randint(0, 1_000_000))
