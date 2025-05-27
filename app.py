@@ -185,9 +185,10 @@ elif menu == "Practice":
 
                 with col1:
                     if st.button("🔁 Try Again"):
-                        st.session_state.masked_indices = []  # Keep same verse, new blanks
+                        st.session_state.masked_indices = [
+                            i for i in range(len(original_words)) if random.random() < 0.3
+                        ]
                         st.experimental_rerun()
-
                 with col2:
                     if st.button("➡️ Next Verse"):
                         st.session_state.current_verse = random.choice(verses)
