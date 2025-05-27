@@ -86,7 +86,7 @@ Use the **"Add New"** section to include any passage you'd like to memorize, tag
 
 st.sidebar.markdown("### Navigation")
 st.sidebar.markdown("---")
-st.sidebar.markdown("📚 **Includes:** Roman's Road & Re:generation step memory verses")
+st.sidebar.markdown("📚 **Includes:** Romans Road & Re:generation step memory verses")
 st.sidebar.markdown("➕ Add your own verses anytime!")
 
 menu = st.sidebar.radio("Go to", ["View Verses", "Add New", "Practice"])
