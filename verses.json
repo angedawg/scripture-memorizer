@@ -3,30 +3,119 @@
     "reference": "Romans 3:23",
     "text": "For all have sinned and fall short of the glory of God.",
     "status": "learning",
-    "last_reviewed": "2025-05-26"
+    "last_reviewed": "2025-05-26",
+	"tags": ["Romans Road"]
   },
   {
     "reference": "Romans 6:23",
     "text": "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.",
     "status": "learning",
-    "last_reviewed": "2025-05-26"
+    "last_reviewed": "2025-05-26",
+	"tags": ["Romans Road"]
   },
   {
     "reference": "Romans 5:8",
     "text": "But God demonstrates his own love for us in this: While we were still sinners, Christ died for us.",
     "status": "learning",
-    "last_reviewed": "2025-05-26"
+    "last_reviewed": "2025-05-26",
+	"tags": ["Romans Road"]
   },
   {
     "reference": "Romans 10:9",
     "text": "If you declare with your mouth, 'Jesus is Lord,' and believe in your heart that God raised him from the dead, you will be saved.",
     "status": "learning",
-    "last_reviewed": null
+    "last_reviewed": null,
+	"tags": ["Romans Road"]
   },
   {
     "reference": "Romans 10:13",
     "text": "For everyone who calls on the name of the Lord will be saved.",
     "status": "learning",
-    "last_reviewed": "2025-05-26"
+    "last_reviewed": "2025-05-26",
+	"tags": ["Romans Road"]
+  },
+  {
+    "reference": "Romans 7:18",
+    "text": "For I know that nothing good dwells in me, that is, in my flesh. For I have the desire to do what is right, but not the ability to carry it out.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 1"]
+  },
+  {
+    "reference": "Psalm 103:2-5",
+    "text": "Bless the Lord, O my soul, and forget not all his benefits, who forgives all your iniquity, who heals all your diseases, who redeems your life from the pit, who crowns you with steadfast love and mercy, who satisfies you with good so that your youth is renewed like the eagle’s.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 2"]
+  },
+  {
+    "reference": "Ephesians 2:4-5",
+    "text": "But God, being rich in mercy, because of the great love with which he loved us, even when we were dead in our trespasses, made us alive together with Christ—by grace you have been saved.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 3"]
+  },
+  {
+    "reference": "Psalm 51:6",
+    "text": "Behold, you delight in truth in the inward being, and you teach me wisdom in the secret heart.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 4"]
+  },
+  {
+    "reference": "1 John 1:7-9",
+    "text": "But if we walk in the light, as he is in the light, we have fellowship with one another, and the blood of Jesus his Son cleanses us from all sin. If we say we have no sin, we deceive ourselves, and the truth is not in us. If we confess our sins, he is faithful and just to forgive us our sins and to cleanse us from all unrighteousness.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 5"]
+  },
+  {
+    "reference": "2 Timothy 2:22",
+    "text": "So flee youthful passions and pursue righteousness, faith, love, and peace, along with those who call on the Lord from a pure heart.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 6"]
+  },
+  {
+    "reference": "Galatians 5:22-25",
+    "text": "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control; against such things there is no law. And those who belong to Christ Jesus have crucified the flesh with its passions and desires. If we live by the Spirit, let us also keep in step with the Spirit.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 7"]
+  },
+  {
+    "reference": "Ephesians 4:32–5:1",
+    "text": "Be kind to one another, tenderhearted, forgiving one another, as God in Christ forgave you. Therefore be imitators of God, as beloved children.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 8"]
+  },
+  {
+    "reference": "Romans 12:17-18",
+    "text": "Repay no one evil for evil, but give thought to do what is honorable in the sight of all. If possible, so far as it depends on you, live peaceably with all.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 9"]
+  },
+  {
+    "reference": "Psalm 139:23-24",
+    "text": "Search me, O God, and know my heart! Try me and know my thoughts! And see if there be any grievous way in me, and lead me in the way everlasting!",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 10"]
+  },
+  {
+    "reference": "John 17:3",
+    "text": "And this is eternal life, that they know you the only true God, and Jesus Christ whom you have sent.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 11"]
+  },
+  {
+    "reference": "2 Corinthians 5:17-18",
+    "text": "Therefore, if anyone is in Christ, he is a new creation. The old has passed away; behold, the new has come. All this is from God, who through Christ reconciled us to himself and gave us the ministry of reconciliation.",
+    "status": "learning",
+    "last_reviewed": null,
+    "tags": ["Re:generation", "Step 12"]
   }
 ]
