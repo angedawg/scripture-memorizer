@@ -127,7 +127,11 @@ elif menu == "Practice":
     if not verses:
         st.info("Add some verses first.")
     else:
-        v = random.choice(verses)
+        # 🧠 Store the verse persistently in session state
+        if "current_verse" not in st.session_state:
+            st.session_state.current_verse = random.choice(verses)
+
+        v = st.session_state.current_verse
         st.markdown(f"### {v['reference']}")
         practice_type = st.radio("Practice Mode", ["Fill in the Blanks", "Type Full Verse"])
 
@@ -161,6 +165,11 @@ elif menu == "Practice":
                         st.markdown("**Correct Verse:**")
                         st.markdown(f"> {v['text']}")
 
+                    # ✅ Update review date and reset session state for next round
+                    v["last_reviewed"] = str(datetime.date.today())
+                    save_verses(verses)
+                    st.session_state.current_verse = random.choice(verses)
+
         elif practice_type == "Type Full Verse":
             user_input = st.text_area("Type the verse from memory:")
             if st.button("Check"):
@@ -170,6 +179,6 @@ elif menu == "Practice":
                     st.error("Not quite. Keep practicing!")
                     st.markdown(f"**Correct verse:** {v['text']}")
 
-        # Update review date
-        v["last_reviewed"] = str(datetime.date.today())
-        save_verses(verses)
+                v["last_reviewed"] = str(datetime.date.today())
+                save_verses(verses)
+                st.session_state.current_verse = random.choice(verses)
