@@ -10,4 +10,4 @@ A quiet place to memorize and meditate on Scripture.
 You can add any Bible verse(s) you want through the app’s UI. Tags help you group them by topic or theme.
 
 ## 🚀 Live Demo
-[Click here to open the app](https://angedawg-scripture-memorizer-app-qaku1a.streamlit.app/)
+[Click here to open the app](https://SelahMemory.streamlit.app/)
