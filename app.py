@@ -185,14 +185,14 @@ elif menu == "Practice":
 
                 with col1:
                     if st.button("🔁 Try Again"):
-                    st.session_state.masked_indices = []  # Keep same verse, new blanks
-                    st.experimental_rerun()
+                        st.session_state.masked_indices = []  # Keep same verse, new blanks
+                        st.experimental_rerun()
 
                 with col2:
                     if st.button("➡️ Next Verse"):
-                    st.session_state.current_verse = random.choice(verses)
-                    st.session_state.masked_indices = []
-                    st.experimental_rerun()
+                        st.session_state.current_verse = random.choice(verses)
+                        st.session_state.masked_indices = []
+                        st.experimental_rerun()
 
         elif practice_type == "Type Full Verse":
             user_input = st.text_area("Type the verse from memory:")
