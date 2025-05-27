@@ -139,7 +139,7 @@ elif menu == "Practice":
 
         if practice_type == "Fill in the Blanks":
             # Only generate masked indices once
-            if not st.session_state.masked_indices:
+            if "masked_indices" not in st.session_state or not st.session_state.masked_indices:
                 st.session_state.masked_indices = [i for i in range(len(original_words)) if random.random() < 0.3]
 
             masked_indices = st.session_state.masked_indices
