@@ -137,12 +137,12 @@ elif menu == "Practice":
     if not verses:
         st.info("Add some verses first.")
     else:
-    # Initialize session state properly
-    if "current_verse" not in st.session_state:
-        verse, masked = load_new_masked_verse(verses)
-        st.session_state.current_verse = verse
-        st.session_state.masked_indices = masked
-        st.session_state.input_key = 0
+        # Initialize session state properly
+        if "current_verse" not in st.session_state:
+            verse, masked = load_new_masked_verse(verses)
+            st.session_state.current_verse = verse
+            st.session_state.masked_indices = masked
+            st.session_state.input_key = 0
 
         v = st.session_state.current_verse
         st.markdown(f"### {v['reference']}")
@@ -198,6 +198,7 @@ elif menu == "Practice":
                         st.session_state.masked_indices = new_mask
                         st.session_state.input_key += 1
                         st.experimental_rerun()
+
                 with col2:
                     if st.button("➡️ Next Verse"):
                         st.session_state.current_verse = random.choice(verses)
