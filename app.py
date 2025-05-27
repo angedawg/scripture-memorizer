@@ -205,8 +205,8 @@ elif menu == "Practice":
 
                 with col1:
                     if st.button("🔁 Try Again"):
-                    rerandomize_blanks_for_current_verse()
-                    st.experimental_rerun()
+                        rerandomize_blanks_for_current_verse()
+                        st.experimental_rerun()
                 with col2:
                     if st.button("➡️ Next Verse"):
                         st.session_state.current_verse = random.choice(verses)
