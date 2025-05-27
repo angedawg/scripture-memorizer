@@ -11,6 +11,13 @@ st.set_page_config(page_title="Scripture Memorizer", layout="centered")
 DATA_FILE = "verses.json"
 STREAK_FILE = "streak.json"
 
+def rerandomize_blanks():
+    v = st.session_state.current_verse
+    words = v["text"].split()
+    st.session_state.masked_indices = [i for i in range(len(words)) if random.random() < 0.3]
+    st.session_state.input_key += 1
+    st.experimental_rerun()
+
 def load_new_masked_verse(verses):
     verse = random.choice(verses)
     words = verse["text"].split()
@@ -194,11 +201,7 @@ elif menu == "Practice":
 
                 with col1:
                     if st.button("🔁 Try Again"):
-                        _, new_mask = load_new_masked_verse([st.session_state.current_verse])
-                        st.session_state.masked_indices = new_mask
-                        st.session_state.input_key += 1
-                        st.experimental_rerun()
-
+                        rerandomize_blanks()
                 with col2:
                     if st.button("➡️ Next Verse"):
                         st.session_state.current_verse = random.choice(verses)
