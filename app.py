@@ -11,6 +11,12 @@ st.set_page_config(page_title="Scripture Memorizer", layout="centered")
 DATA_FILE = "verses.json"
 STREAK_FILE = "streak.json"
 
+def load_new_masked_verse(verses):
+    verse = random.choice(verses)
+    words = verse["text"].split()
+    masked = [i for i in range(len(words)) if random.random() < 0.3]
+    return verse, masked
+
 def clean_word(word):
     return re.sub(r'[^\w]', '', word).lower().strip()
 
@@ -131,9 +137,12 @@ elif menu == "Practice":
     if not verses:
         st.info("Add some verses first.")
     else:
-        if "current_verse" not in st.session_state:
-            st.session_state.current_verse = random.choice(verses)
-            st.session_state.masked_indices = []
+    # Initialize session state properly
+    if "current_verse" not in st.session_state:
+        verse, masked = load_new_masked_verse(verses)
+        st.session_state.current_verse = verse
+        st.session_state.masked_indices = masked
+        st.session_state.input_key = 0
 
         v = st.session_state.current_verse
         st.markdown(f"### {v['reference']}")
@@ -155,7 +164,7 @@ elif menu == "Practice":
             ]
             st.markdown(" ".join(displayed))
 
-            with st.form("fill_in_blanks"):
+            with st.form(f"fill_in_blanks_{st.session_state.input_key}"):
                 user_inputs = []
                 for i in masked_indices:
                     key = f"blank_input_{i}"  # Unique key to isolate inputs per word
@@ -185,9 +194,9 @@ elif menu == "Practice":
 
                 with col1:
                     if st.button("🔁 Try Again"):
-                        st.session_state.masked_indices = [
-                            i for i in range(len(original_words)) if random.random() < 0.3
-                        ]
+                        _, new_mask = load_new_masked_verse([st.session_state.current_verse])
+                        st.session_state.masked_indices = new_mask
+                        st.session_state.input_key += 1
                         st.experimental_rerun()
                 with col2:
                     if st.button("➡️ Next Verse"):
