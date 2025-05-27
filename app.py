@@ -11,6 +11,12 @@ st.set_page_config(page_title="Scripture Memorizer", layout="centered")
 DATA_FILE = "verses.json"
 STREAK_FILE = "streak.json"
 
+def rerandomize_blanks_for_current_verse():
+    verse = st.session_state.current_verse
+    words = verse["text"].split()
+    st.session_state.masked_indices = [i for i in range(len(words)) if random.random() < 0.3]
+    st.session_state.input_key = random.randint(0, 999999)  # Force a fresh form
+
 def rerandomize_blanks():
     v = st.session_state.current_verse
     words = v["text"].split()
@@ -146,10 +152,8 @@ elif menu == "Practice":
     else:
         # Initialize session state properly
         if "current_verse" not in st.session_state:
-            verse, masked = load_new_masked_verse(verses)
-            st.session_state.current_verse = verse
-            st.session_state.masked_indices = masked
-            st.session_state.input_key = 0
+            st.session_state.current_verse, st.session_state.masked_indices = load_new_masked_verse(verses)
+            st.session_state.input_key = random.randint(0, 999999)
 
         v = st.session_state.current_verse
         st.markdown(f"### {v['reference']}")
@@ -201,7 +205,8 @@ elif menu == "Practice":
 
                 with col1:
                     if st.button("🔁 Try Again"):
-                        rerandomize_blanks()
+                    rerandomize_blanks_for_current_verse()
+                    st.experimental_rerun()
                 with col2:
                     if st.button("➡️ Next Verse"):
                         st.session_state.current_verse = random.choice(verses)
