@@ -4,11 +4,15 @@ import datetime
 import requests
 import random
 import os
+import re
 
 st.set_page_config(page_title="Scripture Memorizer", layout="centered")
 
 DATA_FILE = "verses.json"
 STREAK_FILE = "streak.json"
+
+def clean_word(word):
+    return re.sub(r'[^\w]', '', word).lower().strip()
 
 def load_verses():
     try:
@@ -160,28 +164,40 @@ elif menu == "Practice":
 
                 submitted = st.form_submit_button("Check Answers")
 
-                if submitted:
-                    correct = 0
-                    for i, user_word in user_inputs:
-                        actual = original_words[i]
-                        if user_word.lower() == actual.lower():
-                            correct += 1
+            if submitted:
+                correct = 0
+                for i, user_word in user_inputs:
+                actual = original_words[i]
+                if clean_word(user_word) == clean_word(actual):
+                    correct += 1
 
-                    st.success(f"{correct} out of {len(masked_indices)} correct.")
-                    if correct != len(masked_indices):
-                        st.markdown("**Correct Verse:**")
-                        st.markdown(f"> {v['text']}")
+                st.success(f"{correct} out of {len(masked_indices)} correct.")
+                if correct != len(masked_indices):
+                    st.markdown("**Correct Verse:**")
+                    st.markdown(f"> {v['text']}")
 
-                    # Save review and reset for next round
-                    v["last_reviewed"] = str(datetime.date.today())
-                    save_verses(verses)
+                # Save review date for the current verse
+                v["last_reviewed"] = str(datetime.date.today())
+                save_verses(verses)
+
+                # ✅ Wait for user to choose to move on
+                col1, col2 = st.columns(2)
+
+                with col1:
+                    if st.button("🔁 Try Again"):
+                    st.session_state.masked_indices = []  # Keep same verse, new blanks
+                    st.experimental_rerun()
+
+                with col2:
+                    if st.button("➡️ Next Verse"):
                     st.session_state.current_verse = random.choice(verses)
-                    st.session_state.masked_indices = []  # Reset mask
+                    st.session_state.masked_indices = []
+                    st.experimental_rerun()
 
         elif practice_type == "Type Full Verse":
             user_input = st.text_area("Type the verse from memory:")
             if st.button("Check"):
-                if user_input.strip().lower() == v["text"].strip().lower():
+                if clean_word(user_input) == clean_word(v["text"]):
                     st.success("Correct! 🎉")
                 else:
                     st.error("Not quite. Keep practicing!")
