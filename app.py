@@ -150,7 +150,7 @@ elif menu == "Practice":
 
             # Display the verse with blanks
             displayed = [
-                f"__**[{i+1}]**__" if i in masked_indices else word
+                "_______" if i in masked_indices else word
                 for i, word in enumerate(original_words)
             ]
             st.markdown(" ".join(displayed))
