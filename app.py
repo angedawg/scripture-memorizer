@@ -167,9 +167,9 @@ elif menu == "Practice":
             if submitted:
                 correct = 0
                 for i, user_word in user_inputs:
-                actual = original_words[i]
-                if clean_word(user_word) == clean_word(actual):
-                    correct += 1
+                    actual = original_words[i]
+                    if clean_word(user_word) == clean_word(actual):
+                        correct += 1
 
                 st.success(f"{correct} out of {len(masked_indices)} correct.")
                 if correct != len(masked_indices):
